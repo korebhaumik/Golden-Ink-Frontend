@@ -2,8 +2,10 @@ import { LArrowSVG, TruckSVG, RefundSVG, LockSVG } from "../assets/svg";
 import FAQList from "../components/FAQList";
 import Slider from "../components/Slider";
 import Logo from "../../public/Logo.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <>
       {/* Section 1 */}
@@ -148,7 +150,12 @@ export default function Home() {
                 Create your own account now !!
               </p>
             </div>
-            <button className="text-white bg-black rounded-full max-h-14 px-9 ">
+            <button
+              className="text-white bg-black rounded-full max-h-14 px-9 "
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
               Get Started
             </button>
           </div>
