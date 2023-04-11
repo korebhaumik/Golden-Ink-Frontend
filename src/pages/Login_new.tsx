@@ -6,7 +6,7 @@ type Props = {};
 export default function Login({}: Props) {
   const navigate = useNavigate();
   return (
-    <div className="flex items-center h-screen ">
+    <div className="flex items-center h-full ">
       <div className=" px-4 m-auto w-full sm:w-[430px]">
         <div>
           <TRArrowSVG />
