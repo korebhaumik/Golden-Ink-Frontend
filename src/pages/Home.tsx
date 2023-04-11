@@ -153,7 +153,7 @@ export default function Home() {
             <button
               className="text-white bg-black rounded-full max-h-14 px-9 "
               onClick={() => {
-                navigate("/login");
+                navigate("/signUp");
               }}
             >
               Get Started
@@ -209,7 +209,14 @@ export default function Home() {
                 placeholder="Email Address"
               /> */}
             </div>
-            <button className="bg-black text-white px-4 py-4">Click me </button>
+            <button
+              className="bg-black text-white px-4 py-4"
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Click me{" "}
+            </button>
           </div>
         </div>
         <div className="mx-auto mt-5 w-96">
