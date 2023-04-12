@@ -7,7 +7,7 @@ export default function Login({}: Props) {
   const navigate = useNavigate();
   return (
     <div className="flex items-center h-screen ">
-      <div className=" px-4 m-auto w-full sm:w-[430px]">
+      <div className=" px-4 m-auto w-full sm:w-[400px]">
         <div>
           <TRArrowSVG />
           <h1 className="text-2xl mt-2 mb-1.5 font-medium">Log into your Account 🥳</h1>
