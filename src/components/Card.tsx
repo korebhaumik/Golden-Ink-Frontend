@@ -4,6 +4,11 @@ import image_2 from "../assets/book_2.png";
 import image_3 from "../assets/book_3.png";
 import image_4 from "../assets/book_4.png";
 import image_5 from "../assets/book_5.png";
+import image_6 from "../assets/book_6.png";
+import image_7 from "../assets/book_7.png";
+import image_8 from "../assets/book_8.png";
+import image_9 from "../assets/book_9.png";
+import image_10 from "../assets/book_10.png";
 import { StarSVG } from "../assets/svg";
 import ItemPreview from "./ItemPreview.store";
 import { useState } from "react";
@@ -15,8 +20,8 @@ type Props = {
 
 export default function ({ book }: Props) {
   const [bool, setBool] = useState<boolean>(false);
-  const k = Math.floor(Math.random() * 5);
-  const imageArr = [image_1, image_2, image_3, image_4, image_5];
+  // const k = Math.floor(Math.random() * 10);
+  const imageArr = [image_1, image_2, image_3, image_4, image_5,image_6,image_7,image_8,image_9,image_10];
   return (
     <>
       <div className="my-4 mx-auto md:mx-0">
@@ -28,7 +33,8 @@ export default function ({ book }: Props) {
           }}
         >
           <img
-            src={imageArr[1]}
+          //@ts-ignore
+            src={imageArr[book.url-1]}
             className="h-44 border-2 border-black"
             alt=""
           />

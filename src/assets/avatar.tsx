@@ -19,8 +19,20 @@ import avatar_18 from "./avatars/avatar_18.png";
 import avatar_19 from "./avatars/avatar_19.png";
 import avatar_20 from "./avatars/avatar_20.png";
 
-export const Avatar_1 = () => {
-  return <img className="w-12 h-12 " src={avatar_1}></img>;
+interface IAvatar {
+  className?: string;
+  onClick?: () => void;
+}
+export const Avatar_1 = ({ className, onClick }: IAvatar) => {
+  return (
+    <div className="border-4 border-blue-400 rounded-full h-fit  ">
+      <img
+        className={className || "w-12 h-12 rounded-full "}
+        src={avatar_1}
+        onClick={onClick}
+      ></img>
+    </div>
+  );
 };
 export const Avatar_2 = () => {
   return <img className="w-12 h-12 " src={avatar_2}></img>;

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { TRArrowSVG, RArrowSVG } from "../assets/svg";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/Auth.context";
 
 interface IForm {
   email: string;
@@ -13,6 +14,11 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const authRelated = useContext(AuthContext);
+
+  if (!authRelated) return null;
+
+  const {handleLogin} = authRelated;
 
   const handleSubmit = async () => {
     try {
@@ -23,7 +29,10 @@ export default function Login() {
         body: JSON.stringify(temp),
       });
       const output = await response.json();
-      console.log(output.type);
+      if (output["_id"]) {
+        console.log(output);
+        navigate("/store");
+      }
     } catch (err: any) {
       console.log(err);
     }
@@ -52,12 +61,16 @@ export default function Login() {
               setTemp={setTemp}
               value={temp.email}
             />
-            <Unit label="Password" placeholder="@#%@^$&" type="password" 
-            setTemp={setTemp}
-            value={temp.password}/>
+            <Unit
+              label="Password"
+              placeholder="@#%@^$&"
+              type="password"
+              setTemp={setTemp}
+              value={temp.password}
+            />
             <button
               className="w-full py-3 mt-2 text-white rounded bg-accent-blue-800"
-              onClick={handleSubmit}
+              onClick={()=> handleLogin(temp)}
             >
               Log In
             </button>

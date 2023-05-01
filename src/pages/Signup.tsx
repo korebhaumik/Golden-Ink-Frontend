@@ -22,44 +22,53 @@ import {
   Avatar_20,
 } from "../assets/avatar";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState,useContext } from "react";
+import { AuthContext } from "../context/Auth.context";
 
 interface IForm {
-  Username: string;
-  Email: string;
-  Password: string;
-  "Confirm Password": string;
-  Avatar: number;
+  username: string;
+  email: string;
+  password: string;
+  "confirm password": string;
+  avatar: number;
 }
 
 export default function Signup() {
   const navigate = useNavigate();
   const [temp, setTemp] = useState<IForm>({
-    Username: "",
-    Email: "",
-    Password: "",
-    "Confirm Password": "",
-    Avatar: 0,
+    username: "",
+    email: "",
+    password: "",
+    "confirm password": "",
+    avatar: 0,
   });
+  const authRelated = useContext(AuthContext);
 
-  const handleSubmit = async () => {
-    try {
-      const response = await fetch("http://localhost:1337/createUser", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          username: "Bhaumik",
-          email: "korebhaumik@gmail.com",
-          password: "12345",
-        }),
-      });
-      const output = await response.json();
-      console.log(output);
-    } catch (err: any) {
-      console.log(err);
-    }
-  };
+  if (!authRelated) return null;
+
+  const {handleSignup} = authRelated;
+
+  // const handleSubmit = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:1337/createUser", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       credentials: "include",
+  //       body: JSON.stringify({
+  //         username: temp.username,
+  //         email: temp.email,
+  //         password: temp.password,
+  //       }),
+  //     });
+  //     const output = await response.json();
+  //     if(output["_id"]){
+  //       console.log(output);
+  //       navigate("/store");
+  //     }
+  //   } catch (err: any) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <div className="flex items-center lg:h-screen">
@@ -84,32 +93,32 @@ export default function Signup() {
               placeholder="John Doe"
               type="text"
               setTemp={setTemp}
-              value={temp.Username}
+              value={temp.username}
             />
             <Unit
               label="Email"
               placeholder="johndoe@gmail.com"
               type="text"
               setTemp={setTemp}
-              value={temp.Email}
+              value={temp.email}
             />
             <Unit
               label="Password"
               placeholder="@#%@^$&"
               type="password"
               setTemp={setTemp}
-              value={temp.Password}
+              value={temp.password}
             />
             <Unit
               label="Confirm Password"
               placeholder="@#%@^$&"
               type="password"
               setTemp={setTemp}
-              value={temp["Confirm Password"]}
+              value={temp["confirm password"]}
             />
             <button
               className="w-full py-3 mt-2 text-white rounded bg-accent-blue-800"
-              onClick={handleSubmit}
+              onClick={()=>handleSignup(temp)}
             >
               Create Account
             </button>
@@ -190,7 +199,7 @@ function Unit({ label, placeholder, type, value, setTemp }: IUnit) {
           setTemp((prev) => {
             return {
               ...prev,
-              [label]: e.target.value,
+              [label.toLowerCase()]: e.target.value,
             };
           });
         }}

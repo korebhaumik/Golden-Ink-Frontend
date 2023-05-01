@@ -5,12 +5,18 @@ import Cart from "./Sidebar";
 import { useState, useRef, useContext } from "react";
 import { AnimatePresence } from "framer-motion";
 import Dropdown from "./Dropdown";
+import { Avatar_1 } from "../assets/avatar";
+import { AuthContext } from "../context/Auth.context";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  // const [logBool, setLogBool] = useState<boolean>(false);
   const [bool, setBool] = useState<boolean>(false);
   const [dbool, setDBool] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const authRelated = useContext(AuthContext);
+  if (!authRelated) return null;
+  const { isAuth } = authRelated;
   return (
     <>
       <div className="absolute left-0 w-full top-3">
@@ -33,19 +39,35 @@ export default function Navbar() {
             <a className="mx-3 cursor-pointer">Contact Us</a>
           </div>
           <div className="flex items-center">
-            <button
-              className="hidden py-3.5 mx-5 text-white bg-black rounded-full md:block px-9"
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </button>
+            {!isAuth ? (
+              <button
+                className="hidden py-3.5 mx-5 text-white bg-black rounded-full md:block px-9"
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </button>
+            ) : (
+              <div className="relative">
+                <Avatar_1
+                  className="w-10 h-10 mr-2 cursor-pointer "
+                  onClick={() => {
+                    setDBool((prev) => !prev);
+                  }}
+                />
+                <AnimatePresence>
+                  {dbool && (
+                    <Dropdown setDBool={setDBool} />
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
 
             <NotifSVG
               onClick={() => {
                 setDBool((prev) => !prev);
               }}
             />
-            <AnimatePresence>{dbool && <Dropdown />}</AnimatePresence>
+
             <CartSVG
               onClick={() => {
                 setBool(true);
