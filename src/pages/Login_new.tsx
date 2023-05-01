@@ -1,16 +1,41 @@
 import { useNavigate } from "react-router-dom";
 import { TRArrowSVG, RArrowSVG } from "../assets/svg";
+import { useState } from "react";
 
-type Props = {};
+interface IForm {
+  email: string;
+  password: string;
+}
 
-export default function Login({}: Props) {
+export default function Login() {
   const navigate = useNavigate();
+  const [temp, setTemp] = useState<IForm>({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("http://localhost:1337/loginUser", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(temp),
+      });
+      const output = await response.json();
+      console.log(output.type);
+    } catch (err: any) {
+      console.log(err);
+    }
+  };
   return (
     <div className="flex items-center h-screen ">
       <div className=" px-4 m-auto w-full sm:w-[400px]">
         <div>
           <TRArrowSVG />
-          <h1 className="text-2xl mt-2 mb-1.5 font-medium">Log into your Account 🥳</h1>
+          <h1 className="text-2xl mt-2 mb-1.5 font-medium">
+            Log into your Account 🥳
+          </h1>
           <p className=" text-sm text-primary-400">
             Pls fill the following information.
           </p>
@@ -20,9 +45,20 @@ export default function Login({}: Props) {
           {/* Account Info */}
           <div className="">
             <h2 className="my-3 text-lg font-medium">Account Information</h2>
-            <Unit label="Email" placeholder="johndoe@gmail.com" type="text" />
-            <Unit label="Password" placeholder="@#%@^$&" type="password" />
-            <button className="w-full py-3 mt-2 text-white rounded bg-accent-blue-800">
+            <Unit
+              label="Email"
+              placeholder="johndoe@gmail.com"
+              type="text"
+              setTemp={setTemp}
+              value={temp.email}
+            />
+            <Unit label="Password" placeholder="@#%@^$&" type="password" 
+            setTemp={setTemp}
+            value={temp.password}/>
+            <button
+              className="w-full py-3 mt-2 text-white rounded bg-accent-blue-800"
+              onClick={handleSubmit}
+            >
               Log In
             </button>
             <p className="mt-4 text-center text-accent-blue-800">
@@ -43,21 +79,22 @@ export default function Login({}: Props) {
   );
 }
 
-function Unit({
-  label,
-  placeholder,
-  type,
-}: {
-  label: string;
-  placeholder: string;
-  type: "text" | "password";
-}) {
+function Unit({ label, placeholder, type, value, setTemp }: IUnit) {
   return (
     <div className="my-4">
       <h3 className="">{label}</h3>
       <input
         type={type}
         placeholder={placeholder}
+        value={value}
+        onChange={(e) => {
+          setTemp((prev) => {
+            return {
+              ...prev,
+              [label.toLocaleLowerCase()]: e.target.value,
+            };
+          });
+        }}
         className="w-full px-4 py-2.5 font-light border rounded border-primary-400 mt-1 tracking-wide"
       />
     </div>
@@ -67,3 +104,11 @@ function Unit({
 // onClick={() => navigate("/")}
 // w-[430px]
 // min-w-0 w-80
+
+interface IUnit {
+  label: string;
+  placeholder: string;
+  type: "text" | "password";
+  value: string;
+  setTemp: React.Dispatch<React.SetStateAction<IForm>>;
+}

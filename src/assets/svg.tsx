@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
 
+interface ISvg {
+  className?: string;
+  onClick?: () => void;
+}
 //Cart SVG
-export const CartSVG = () => {
+export const CartSVG = ({ onClick }: ISvg) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -10,6 +14,7 @@ export const CartSVG = () => {
       strokeWidth="1.5"
       stroke="currentColor"
       className="w-6 h-6 mx-4 cursor-pointer "
+      onClick={onClick}
     >
       <path
         strokeLinecap="round"
@@ -21,7 +26,7 @@ export const CartSVG = () => {
 };
 
 //Cart SVG
-export const NotifSVG = () => {
+export const NotifSVG = ({onClick}:ISvg) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -30,6 +35,7 @@ export const NotifSVG = () => {
       strokeWidth="1.5"
       stroke="currentColor"
       className="hidden w-6 h-6 mx-4 cursor-pointer md:block"
+      onClick={onClick}
     >
       <path
         strokeLinecap="round"
@@ -200,6 +206,26 @@ export const ChevronRightSVG = () => {
   );
 };
 
+//chevron-down SVG
+export const ChevronDownSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2.5"
+      stroke="currentColor"
+      className="w-4 h-4"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+      />
+    </svg>
+  );
+};
+
 //quotes SVG
 export const QuotesSVG = () => {
   return (
@@ -240,13 +266,13 @@ export const QuotesSVG = () => {
 };
 
 //Star SVG
-export const StarSVG = () => {
+export const StarSVG = ({ className }: { className: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      className="w-5 h-5 text-yellow-500"
+      className={className}
     >
       <path
         fillRule="evenodd"
@@ -278,7 +304,7 @@ export const CrossSVG = () => {
 };
 
 //Top Right ArrowSVG
-export const TRArrowSVG = () => {
+export const TRArrowSVG = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -286,12 +312,196 @@ export const TRArrowSVG = () => {
       viewBox="0 0 24 24"
       strokeWidth="2.5"
       stroke="currentColor"
-      className="w-8 h-8"
+      className={`w-8 h-8 ${className}`}
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+      />
+    </svg>
+  );
+};
+
+//Search SVG
+export const SearchSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2.5"
+      stroke="currentColor"
+      className="w-4 h-4"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+      />
+    </svg>
+  );
+};
+
+//Filter SVG
+export const FilterSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        fillRule="evenodd"
+        d="M3.792 2.938A49.069 49.069 0 0112 2.25c2.797 0 5.54.236 8.209.688a1.857 1.857 0 011.541 1.836v1.044a3 3 0 01-.879 2.121l-6.182 6.182a1.5 1.5 0 00-.439 1.061v2.927a3 3 0 01-1.658 2.684l-1.757.878A.75.75 0 019.75 21v-5.818a1.5 1.5 0 00-.44-1.06L3.13 7.938a3 3 0 01-.879-2.121V4.774c0-.897.64-1.683 1.542-1.836z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+};
+
+//Genre SVG
+export const GenreSVG = ({ className }: ISvg) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      className={className}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
+      />
+    </svg>
+  );
+};
+
+//Rating SVG
+export const RatingSVG = ({ className }: ISvg) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      className={className}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
+      />
+    </svg>
+  );
+};
+
+//Exclusive SVG
+export const ExclusiveSVG = ({ className }: ISvg) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      className={className}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z"
+      />
+    </svg>
+  );
+};
+
+//Shield SVG
+export const ShieldSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6 mr-2 "
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
+      />
+    </svg>
+  );
+};
+
+//Check SVG
+export const CheckSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6 mr-2 text-accent-green-600"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M4.5 12.75l6 6 9-13.5"
+      />
+    </svg>
+  );
+};
+
+//XMark SVG
+export const XMarkSVG = ({ className, onClick }: ISvg) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className={className}
+      onClick={onClick}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  );
+};
+
+//Empty SVG
+export const EmptySVG = ({ className, onClick }: ISvg) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6 mr-2"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"
       />
     </svg>
   );

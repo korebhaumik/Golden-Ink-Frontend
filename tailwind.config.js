@@ -30,6 +30,9 @@ export default {
         "accent-blue-33": "rgba(20, 132, 212, 0.33)",
         "accent-blue-77": "rgba(29, 78, 216, 0.7)",
       },
+      maxWidth: {
+        "5.5xl": "66.5rem"
+      }
     },
   },
   plugins: [],

@@ -1,4 +1,4 @@
-import { TRArrowSVG } from "../assets/svg";
+import { TRArrowSVG, RArrowSVG } from "../assets/svg";
 import {
   Avatar_1,
   Avatar_2,
@@ -22,33 +22,95 @@ import {
   Avatar_20,
 } from "../assets/avatar";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-type Props = {};
+interface IForm {
+  Username: string;
+  Email: string;
+  Password: string;
+  "Confirm Password": string;
+  Avatar: number;
+}
 
-export default function Signup({}: Props) {
+export default function Signup() {
   const navigate = useNavigate();
+  const [temp, setTemp] = useState<IForm>({
+    Username: "",
+    Email: "",
+    Password: "",
+    "Confirm Password": "",
+    Avatar: 0,
+  });
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("http://localhost:1337/createUser", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          username: "Bhaumik",
+          email: "korebhaumik@gmail.com",
+          password: "12345",
+        }),
+      });
+      const output = await response.json();
+      console.log(output);
+    } catch (err: any) {
+      console.log(err);
+    }
+  };
+
   return (
-    <div className="flex items-center">
-      {/* <div className="py-10 px-36"> */}
-      <div className="mx-3 py-4  sm:mx-auto ">
+    <div className="flex items-center lg:h-screen">
+      <div className="py-4 mx-3 sm:mx-auto lg:mt-8 lg:w-[56rem]">
         {/* Heading */}
         <div>
           <TRArrowSVG />
-          <h1 className="text-2xl mt-2 mb-1.5 font-medium">Create a new Account 🥳</h1>
-          <p className=" text-sm text-primary-400">
+          <h1 className="text-2xl mt-2 mb-1.5 font-medium">
+            Create a new Account 🥳
+          </h1>
+          <p className="text-sm text-primary-400">
             Pls fill the following information.
           </p>
         </div>
         {/* Content */}
-        <div className="flex flex-wrap-reverse justify-between max-w-5xl  mt-3">
+        <div className="flex flex-col-reverse justify-between max-w-4xl mt-3 lg:flex-row lg:mt-0 ">
           {/* Account Info */}
           <div className="w-full sm:w-[430px]">
             <h2 className="my-3 text-lg font-medium">Account Information</h2>
-            <Unit label="Username" placeholder="John Doe" />
-            <Unit label="Email" placeholder="johndoe@gmail.com" />
-            <Unit label="Password" placeholder="@#%@^$&" />
-            <Unit label="Confirm Password" placeholder="@#%@^$&" />
-            <button className="w-full py-3 mt-2 text-white rounded bg-accent-blue-800">
+            <Unit
+              label="Username"
+              placeholder="John Doe"
+              type="text"
+              setTemp={setTemp}
+              value={temp.Username}
+            />
+            <Unit
+              label="Email"
+              placeholder="johndoe@gmail.com"
+              type="text"
+              setTemp={setTemp}
+              value={temp.Email}
+            />
+            <Unit
+              label="Password"
+              placeholder="@#%@^$&"
+              type="password"
+              setTemp={setTemp}
+              value={temp.Password}
+            />
+            <Unit
+              label="Confirm Password"
+              placeholder="@#%@^$&"
+              type="password"
+              setTemp={setTemp}
+              value={temp["Confirm Password"]}
+            />
+            <button
+              className="w-full py-3 mt-2 text-white rounded bg-accent-blue-800"
+              onClick={handleSubmit}
+            >
               Create Account
             </button>
             <p className="mt-4 text-center text-accent-blue-800">
@@ -64,9 +126,9 @@ export default function Signup({}: Props) {
             </p>
           </div>
           {/* Select Avatar */}
-          <div className="mb-3 sm:w-[410px]">
-            <h2 className=" mb-3 text-lg font-medium">Select your Avatar</h2>
-            <div className="flex flex-wrap bg-primary-200 rounded-sm px-5 sm:px-10 py-7 min-h-[20rem] ">
+          <div className="mb-3 sm:w-[410px] sm:my-3">
+            <h2 className="mb-3 text-lg font-medium ">Select your Avatar</h2>
+            <div className="flex flex-wrap bg-primary-200 rounded px-5 sm:px-10 py-7 min-h-[20rem] ">
               <div className="flex justify-between w-full ">
                 <Avatar_1 />
                 <Avatar_2 />
@@ -103,15 +165,46 @@ export default function Signup({}: Props) {
   );
 }
 
-function Unit({ label, placeholder }: { label: string; placeholder: string }) {
+// function Unit({ label, placeholder }: { label: string; placeholder: string }) {
+//   return (
+//     <div className="my-4">
+//       <h3 className="">{label}</h3>
+//       <input
+//         type="text"
+//         placeholder={placeholder}
+//         className="w-full px-4 py-2.5 font-light border rounded border-primary-400 mt-1"
+//       />
+//     </div>
+//   );
+// }
+
+function Unit({ label, placeholder, type, value, setTemp }: IUnit) {
   return (
     <div className="my-4">
       <h3 className="">{label}</h3>
       <input
-        type="text"
+        type={type}
         placeholder={placeholder}
-        className="w-full px-4 py-2.5 font-light border rounded border-primary-400 mt-1"
+        value={value}
+        onChange={(e) => {
+          setTemp((prev) => {
+            return {
+              ...prev,
+              [label]: e.target.value,
+            };
+          });
+        }}
+        className="w-full px-4 py-2.5 font-light border rounded border-primary-400 mt-1 tracking-wide"
       />
     </div>
   );
+}
+
+// justify-between
+interface IUnit {
+  label: string;
+  placeholder: string;
+  type: "text" | "password";
+  value: string;
+  setTemp: React.Dispatch<React.SetStateAction<IForm>>;
 }

@@ -1,0 +1,41 @@
+[
+  {
+    "url": "../assets/book_1.png",
+    "title": "The Great Circle",
+    "author": "Maggie Shepsterd",
+    "rating": 4,
+    "genre": ["fiction", "adventure"],
+    "quantity": 100,
+    "reviews": "",
+    "description" : "Lorem"
+  },
+  {
+    "url": "../assets/book_1.png",
+    "title": "The Rain Heron",
+    "author": "Bhaumik Kore",
+    "rating": 2,
+    "genre": ["Horror", "Scizo"],
+    "quantity": 100,
+    "reviews": "",
+    "description" : "Lorem"
+  },
+  {
+    "url": "../assets/book_1.png",
+    "title": "Random Book Title Lidl Long Title",
+    "author": "Sebastion Fors",
+    "rating": 5,
+    "genre": ["ZULUL", "VI VON"],
+    "quantity": 100,
+    "reviews": ""
+  },
+  {
+    "url": "../assets/book_1.png",
+    "title": "Random Book Title",
+    "author": "Sebastion Fors",
+    "rating": 5,
+    "genre": ["ZULUL", "VI VON"],
+    "quantity": 100,
+    "reviews": ""
+  }
+
+]
