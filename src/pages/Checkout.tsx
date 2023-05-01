@@ -2,12 +2,13 @@ import bookImg from "../assets/book_3.png";
 import { useContext } from "react";
 import { CartContext } from "../context/Cart.context";
 import { BookType } from "../context/Store.context";
+import { ImageContext } from "../context/Image.context";
 
 export default function Checkout() {
   const cartRelated = useContext(CartContext);
   if (!cartRelated) return null;
 
-  const { cartData, removeFromCart,subtotal } = cartRelated;
+  const { cartData, removeFromCart, subtotal } = cartRelated;
 
   let cartDisplay;
 
@@ -16,7 +17,7 @@ export default function Checkout() {
       return <CartElement book={book} />;
     });
   }
-  const total = subtotal + 15 + 5; 
+  const total = subtotal + 15 + 5;
   return (
     <div className="flex flex-wrap justify-between max-w-5.5xl pt-32 mx-4 sm:mx-20 xl:mx-auto ">
       {/* LHS */}
@@ -64,9 +65,7 @@ export default function Checkout() {
       <div className="w-[30rem]">
         <h1 className="text-xl font-medium">Order Summery</h1>
         <div className="px-2 py-5 mt-3 rounded sm:px-10 bg-primary-200">
-          <div>
-            {cartDisplay}
-          </div>
+          <div>{cartDisplay}</div>
           {/* Price Calc */}
           <div className="mt-3">
             <div className="flex justify-between">
@@ -117,16 +116,18 @@ function FormUnit({ label, placeholder, type, optional }: IFormUnit) {
 }
 
 function CartElement({ book }: ICartElementType) {
+  const imgArr = useContext(ImageContext);
   return (
     <>
       <div className="flex w-full mt-5">
-        <img src={bookImg} className="h-24 py-4 bg-white border rounded px-7" />
+        <img
+          src={imgArr[parseInt(book.url)]}
+          className="h-24 py-4 bg-white border rounded px-7"
+        />
         <div className="flex flex-col justify-between w-full h-24 ml-3">
           <div>
             <div className="flex justify-between">
-              <h2 className="w-3/5 leading-tight sm:w-52">
-                {book.title}
-              </h2>
+              <h2 className="w-3/5 leading-tight sm:w-52">{book.title}</h2>
               <h2>$500</h2>
             </div>
             <p className="text-sm text-primary-400">{book.author}</p>

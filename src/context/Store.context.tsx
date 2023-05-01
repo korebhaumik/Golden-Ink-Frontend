@@ -9,6 +9,7 @@ export type BookType = {
   genre: string[];
   quantity: number;
   reviews: string;
+  description: string;
 };
 type ContextType = {
   name: string;
@@ -24,7 +25,8 @@ function StoreProvider({ children }: { children: JSX.Element }) {
   const { isLoading, error, data } = useQuery({
     queryKey: ["storeData"],
     // queryFn: () => fetch("store_full.json").then((res) => res.json()),
-    queryFn: () => fetch("http://localhost:1337/getMine").then((res) => res.json()),
+    queryFn: () =>
+      fetch("http://localhost:1337/getMine").then((res) => res.json()),
   });
 
   return (

@@ -4,9 +4,11 @@ import { BookType } from "../context/Store.context";
 import image_3 from "../assets/book_3.png";
 import { CheckSVG, CrossSVG, ShieldSVG } from "../assets/svg";
 import { CartContext } from "../context/Cart.context";
+import { ImageContext } from "../context/Image.context";
 
 export default function ItemPreview({ setBool, book }: ItemPreviewProps) {
   const ModalRef = useRef<HTMLDivElement>(null);
+  const imageArr = useContext(ImageContext);
   const data = useContext(CartContext);
   if (!data) return null;
 
@@ -76,7 +78,8 @@ export default function ItemPreview({ setBool, book }: ItemPreviewProps) {
           },
         }}
       >
-        <img src={image_3} className="border-2 border-black h-80" />
+        {/* @ts-ignore */}
+        <img src={imageArr[book.url]} className="border-2 border-black h-80" />
         <div className="sm:w-96 ">
           <h1 className="text-2xl">{book.title}</h1>
           <h2 className="text-lg text-accent-blue-600">- {book.author}</h2>
@@ -88,18 +91,18 @@ export default function ItemPreview({ setBool, book }: ItemPreviewProps) {
             </h2>
           </div>
           <div className="flex flex-wrap">{BajArrJSX}</div>
-          <p className="mb-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio velit
-            laudantium omnis maxime magnam praesentium quae facilis nihil sequi
-            voluptates fugit cum consequatur, expedita repellat aliquam.
-          </p>
+          <p className="mb-2">{book.description}</p>
           <div className="flex items-center">
             <CheckSVG />
             <p className="text-primary-400">In stock and ready to ship</p>
           </div>
           <button
             className="w-full py-3 my-3 font-medium text-white rounded bg-accent-blue-800"
-            onClick={() => addToCart(book)}
+            onClick={() => {
+              addToCart(book);
+              document.body.style.overflow = "auto";
+              setBool((prev) => !prev);
+            }}
           >
             Add to Cart
           </button>

@@ -5,6 +5,7 @@ import { EmptySVG, XMarkSVG } from "../assets/svg";
 import bookImg from "../assets/book_1.png";
 import { CartContext } from "../context/Cart.context";
 import { BookType } from "../context/Store.context";
+import { ImageContext } from "../context/Image.context";
 
 export default function Cart({ setBool, containerRef }: ContainerPropsType) {
   const cartRelated = useContext(CartContext);
@@ -135,13 +136,17 @@ type ContainerPropsType = {
 
 function CartUnit({ book }: ICartUnit) {
   const cartRelated = useContext(CartContext);
+  const imageArr = useContext(ImageContext);
 
   if (!cartRelated) return null;
   const { removeFromCart } = cartRelated;
   return (
     <>
       <div className="flex mt-5 w-full">
-        <img src={bookImg} className="h-24 py-4 px-7 border rounded" />
+        <img
+          src={imageArr[parseInt(book.url)]}
+          className="h-24 py-4 px-7 border rounded"
+        />
         <div className="flex flex-col justify-between h-24 w-full ml-3">
           <div>
             <div className="flex justify-between">
