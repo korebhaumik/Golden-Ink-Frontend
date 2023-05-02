@@ -29,7 +29,10 @@ export default function Home() {
               hendrerit at laoreet dolor vivamus. Euismod enim diam natoque
               faucibus. In libero magna ipsum nisl enim in.
             </p>
-            <button className="px-8 py-4 my-3 text-white rounded-full bg-gradient-to-r from-accent-blue-800 to-accent-blue-600">
+            <button className="px-8 py-4 my-3 text-white rounded-full bg-gradient-to-r from-accent-blue-800 to-accent-blue-600"
+            onClick={() => {
+              navigate("/store");
+            }}>
               <a className="flex items-center">
                 Start Shopping
                 <LArrowSVG />

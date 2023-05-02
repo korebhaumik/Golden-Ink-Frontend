@@ -26,7 +26,7 @@ export const CartSVG = ({ onClick }: ISvg) => {
 };
 
 //Notif SVG
-export const NotifSVG = ({ onClick,className }: ISvg) => {
+export const NotifSVG = ({ onClick, className }: ISvg) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -304,7 +304,7 @@ export const CrossSVG = () => {
 };
 
 //Top Right ArrowSVG
-export const TRArrowSVG = ({ className }: { className?: string }) => {
+export const TRArrowSVG = ({ className, onClick }: ISvg) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -312,7 +312,8 @@ export const TRArrowSVG = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth="2.5"
       stroke="currentColor"
-      className={`w-8 h-8 ${className}`}
+      className={`w-8 h-8 cursor-pointer ${className}`}
+      onClick={onClick}
     >
       <path
         strokeLinecap="round"

@@ -75,7 +75,9 @@ export default function Signup() {
       <div className="py-4 mx-3 sm:mx-auto lg:mt-8 lg:w-[56rem]">
         {/* Heading */}
         <div>
-          <TRArrowSVG />
+          <TRArrowSVG onClick={() => {
+              navigate("/");
+            }}/>
           <h1 className="text-2xl mt-2 mb-1.5 font-medium">
             Create a new Account 🥳
           </h1>

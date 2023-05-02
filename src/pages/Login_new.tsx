@@ -18,30 +18,17 @@ export default function Login() {
 
   if (!authRelated) return null;
 
-  const {handleLogin} = authRelated;
+  const { handleLogin } = authRelated;
 
-  const handleSubmit = async () => {
-    try {
-      const response = await fetch("http://localhost:1337/loginUser", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(temp),
-      });
-      const output = await response.json();
-      if (output["_id"]) {
-        console.log(output);
-        navigate("/store");
-      }
-    } catch (err: any) {
-      console.log(err);
-    }
-  };
   return (
     <div className="flex items-center h-screen ">
       <div className=" px-4 m-auto w-full sm:w-[400px]">
         <div>
-          <TRArrowSVG />
+          <TRArrowSVG
+            onClick={() => {
+              navigate("/store");
+            }}
+          />
           <h1 className="text-2xl mt-2 mb-1.5 font-medium">
             Log into your Account 🥳
           </h1>
@@ -70,7 +57,7 @@ export default function Login() {
             />
             <button
               className="w-full py-3 mt-2 text-white rounded bg-accent-blue-800"
-              onClick={()=> handleLogin(temp)}
+              onClick={() => handleLogin(temp)}
             >
               Log In
             </button>

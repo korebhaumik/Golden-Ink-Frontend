@@ -1,8 +1,7 @@
 import { useRef, MouseEvent, useContext } from "react";
 import { motion } from "framer-motion";
 import { BookType } from "../context/Store.context";
-import image_3 from "../assets/book_3.png";
-import { CheckSVG, CrossSVG, ShieldSVG } from "../assets/svg";
+import { CheckSVG, StarSVG, ShieldSVG } from "../assets/svg";
 import { CartContext } from "../context/Cart.context";
 import { ImageContext } from "../context/Image.context";
 
@@ -86,9 +85,12 @@ export default function ItemPreview({ setBool, book }: ItemPreviewProps) {
           <div className="flex items-center">
             <h2 className="text-xl">$ 500</h2>
             <hr className="w-1 h-5 mx-3 border-none rounded bg-primary-400" />
-            <h2 className="text-yellow-500 underline cursor-pointer">
-              {"(Reviews)"}
-            </h2>
+            <div className="flex items-center">
+              <Stars num={book.rating}/>
+              <h2 className="text-yellow-500 underline cursor-pointer">
+                {/* {"(Reviews)"} */}
+              </h2>
+            </div>
           </div>
           <div className="flex flex-wrap">{BajArrJSX}</div>
           <p className="mb-2">{book.description}</p>
@@ -132,3 +134,12 @@ type ItemPreviewProps = {
   book: BookType;
   setBool: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+
+function Stars({ num }: { num: number }) {
+  const StarsArrJSX: JSX.Element[] = [];
+  for (let i = 0; i < num; i++) {
+    StarsArrJSX.push(<StarSVG className="w-5 h-5 text-yellow-500" key={i} />);
+  }
+  return <div className="flex">{StarsArrJSX}</div>;
+}
