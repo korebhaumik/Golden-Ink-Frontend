@@ -24,19 +24,23 @@ export default function Navbar() {
           <h1 className="text-2xl font-medium">Logo</h1>
           <div className="hidden font-medium ml-28 lg:block ">
             <a
-              className="mx-3 underline cursor-pointer text-sky-700"
+              className="mx-3 cursor-pointer hover:text-accent-blue-600 transition"
               onClick={() => navigate("/")}
             >
               Home
             </a>
             <a
-              className="mx-3 cursor-pointer"
+              className="mx-3 cursor-pointer hover:text-accent-blue-600 transition"
               onClick={() => navigate("/store")}
             >
               Store
             </a>
-            <a className="mx-3 cursor-pointer">Random</a>
-            <a className="mx-3 cursor-pointer">Contact Us</a>
+            <a className="mx-3 cursor-pointer hover:text-accent-blue-600 transition">
+              Orders
+            </a>
+            <a className="mx-3 cursor-pointer hover:text-accent-blue-600 transition">
+              Contact Us
+            </a>
           </div>
           <div className="flex items-center">
             {!isAuth ? (
@@ -49,15 +53,13 @@ export default function Navbar() {
             ) : (
               <div className="relative">
                 <Avatar_1
-                  className="w-10 h-10 mr-2 cursor-pointer "
+                  className="border-2 border-accent-blue-800 rounded-full w-11 h-11 mr-2 cursor-pointer "
                   onClick={() => {
                     setDBool((prev) => !prev);
                   }}
                 />
                 <AnimatePresence>
-                  {dbool && (
-                    <Dropdown setDBool={setDBool} />
-                  )}
+                  {dbool && <Dropdown setDBool={setDBool} />}
                 </AnimatePresence>
               </div>
             )}

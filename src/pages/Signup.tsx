@@ -174,19 +174,6 @@ export default function Signup() {
   );
 }
 
-// function Unit({ label, placeholder }: { label: string; placeholder: string }) {
-//   return (
-//     <div className="my-4">
-//       <h3 className="">{label}</h3>
-//       <input
-//         type="text"
-//         placeholder={placeholder}
-//         className="w-full px-4 py-2.5 font-light border rounded border-primary-400 mt-1"
-//       />
-//     </div>
-//   );
-// }
-
 function Unit({ label, placeholder, type, value, setTemp }: IUnit) {
   return (
     <div className="my-4">

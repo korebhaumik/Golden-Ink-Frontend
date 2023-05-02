@@ -25,9 +25,11 @@ interface IAvatar {
 }
 export const Avatar_1 = ({ className, onClick }: IAvatar) => {
   return (
-    <div className="border-4 border-blue-400 rounded-full h-fit  ">
+    <div
+      className={className || "border-4 border-accent-blue-600 cursor-pointer rounded-full h-fit"}
+    >
       <img
-        className={className || "w-12 h-12 rounded-full "}
+        className={!className?"w-12 h-12 rounded-full": ""}
         src={avatar_1}
         onClick={onClick}
       ></img>

@@ -59,6 +59,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
       if (output["_id"]) {
         console.log(output);
         localStorage.setItem("isAuth", "true");
+        setIsAuth(true);
         navigate("/store");
       }
     } catch (err: any) {

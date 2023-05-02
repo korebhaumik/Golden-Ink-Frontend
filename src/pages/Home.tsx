@@ -56,7 +56,7 @@ export default function Home() {
       <div className="py-0 sm:py-8">
         <div className="max-w-5.5xl mx-4 mb-10 my-7 sm:mx-auto">
           <h1 className="mb-4 text-3xl font-medium leading-snug sm:text-4xl sm:leading-tight ">
-            A Seamless <span className="underline text-sky-600">Experienc</span>{" "}
+            A Seamless <span className="underline text-sky-600">Experience</span>{" "}
             is what we offer...
           </h1>
           <p>
@@ -161,7 +161,7 @@ export default function Home() {
               Get Started
             </button>
           </div>
-          {/* <aside className="w-full bg-blue-300 h-80 mt-7"></aside> */}
+          <aside className="w-full bg-blue-300 h-80 mt-7"></aside>
         </div>
       </div>
       {/* Footer */}

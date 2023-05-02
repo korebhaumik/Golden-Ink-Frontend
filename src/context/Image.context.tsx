@@ -26,7 +26,7 @@ const imageArr = [
   image_8,
   image_9,
   image_10,
-  image_11,
+  image_11
 ];
 
 export const ImageContext = createContext<ContextType>(imageArr);

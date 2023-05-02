@@ -19,7 +19,7 @@ export default function FAQList() {
       <hr />
       <div className=" p-8 rounded-md">
         <div className="flex items-center justify-between">
-          <h2 className="font-medium text-lg">Some super random question ?</h2>
+          <h2 className="font-medium text-lg">How long should i expect my book to arrive ?</h2>
           <CrossSVG />
         </div>
         {/* <p className="font-light my-3">
@@ -31,7 +31,7 @@ export default function FAQList() {
       <hr />
       <div className=" p-8 rounded-md">
         <div className="flex items-center justify-between">
-          <h2 className="font-medium text-lg">Who am I talking to, Aware ?</h2>
+          <h2 className="font-medium text-lg">How long should i expect my book to arrive ?</h2>
           <CrossSVG />
         </div>
         {/* <p className="font-light my-3">
