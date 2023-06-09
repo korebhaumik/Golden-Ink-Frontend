@@ -18,9 +18,10 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function handleLogin(payload: any) {
     try {
-      const response = await fetch("http://159.89.170.119:1338/loginUser", {
+      const response = await fetch("https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/loginUser", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        mode: "cors",
         credentials: "include",
         body: JSON.stringify(payload),
       });
@@ -57,7 +58,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   async function handleLogout() {
-    const response = await fetch("http://159.89.170.119:1338/logoutUser", {
+    const response = await fetch("https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/logoutUser", {
       credentials: "include",
     });
     localStorage.setItem("isAuth", "false");
@@ -76,7 +77,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
           },
         });
       } else {
-        const response = await fetch("http://159.89.170.119:1338/createUser", {
+        const response = await fetch("https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/createUser", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",

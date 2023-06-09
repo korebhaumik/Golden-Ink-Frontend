@@ -39,7 +39,7 @@ export default function Checkout() {
     if(!isValidEmail(temp.email)){
       return toast.error("Pls enter a valid email address.");
     }
-    const res = await fetch("http://159.89.170.119:1338/payment", {
+    const res = await fetch("https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
