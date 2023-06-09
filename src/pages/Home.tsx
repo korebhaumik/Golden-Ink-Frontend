@@ -18,11 +18,11 @@ export default function Home() {
               # Find_Your_Golden_Ink
             </h4>
             <h1 className="max-w-lg my-0 text-3xl font-medium leading-snug sm:text-5xl sm:leading-tight sm:my-3 ">
-              Some{" "}
+              Your{" "}
               <span className="underline text-accent-blue-600 underline-offset-2 ">
-                Crazy
+                Golden Ink 
               </span>{" "}
-              One Liner Or Two Liner...
+              is just a click away...
             </h1>
             <p className="my-4 text-accent-gray-400">
               Lorem ipsum dolor sit amet consectetur. Eu vulputate ut purus
@@ -164,7 +164,7 @@ export default function Home() {
               Get Started
             </button>
           </div>
-          <aside className="w-full bg-blue-300 h-80 mt-7"></aside>
+          {/* <aside className="w-full bg-blue-300 h-80 mt-7"></aside> */}
         </div>
       </div>
       {/* Footer */}

@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 type ContextType = {
   isAuth: boolean;
@@ -17,7 +18,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function handleLogin(payload: any) {
     try {
-      const response = await fetch("http://localhost:1337/loginUser", {
+      const response = await fetch("http://159.89.170.119:1338/loginUser", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -29,14 +30,34 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem("isAuth", "true");
         setIsAuth(true);
         navigate("/store");
+      } else {
+        console.log(output);
+        if (output.type) {
+          toast.error(`${output.message} Pls try again! `, {
+            duration: 2000,
+            position: "top-center",
+            ariaProps: {
+              role: "status",
+              "aria-live": "polite",
+            },
+          });
+        }
       }
     } catch (err: any) {
       console.log(err);
+      toast.error(`${err.message} Pls try again! `, {
+        duration: 2000,
+        position: "top-center",
+        ariaProps: {
+          role: "status",
+          "aria-live": "polite",
+        },
+      });
     }
   }
 
   async function handleLogout() {
-    const response = await fetch("http://localhost:1337/logoutUser", {
+    const response = await fetch("http://159.89.170.119:1338/logoutUser", {
       credentials: "include",
     });
     localStorage.setItem("isAuth", "false");
@@ -45,25 +66,54 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function handleSignup(payload: any) {
     try {
-      const response = await fetch("http://localhost:1337/createUser", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          username: payload.username,
-          email: payload.email,
-          password: payload.password,
-        }),
-      });
-      const output = await response.json();
-      if (output["_id"]) {
-        console.log(output);
-        localStorage.setItem("isAuth", "true");
-        setIsAuth(true);
-        navigate("/store");
+      if (payload["confirm password"] !== payload.password) {
+        toast.error(`Passwords do not match.`, {
+          duration: 2000,
+          position: "top-center",
+          ariaProps: {
+            role: "status",
+            "aria-live": "polite",
+          },
+        });
+      } else {
+        const response = await fetch("http://159.89.170.119:1338/createUser", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            username: payload.username,
+            email: payload.email,
+            password: payload.password,
+          }),
+        });
+        const output = await response.json();
+        if (output["_id"]) {
+          console.log(output);
+          localStorage.setItem("isAuth", "true");
+          setIsAuth(true);
+          navigate("/store");
+        } else {
+          console.log(output);
+          toast.error(`${output.message} Pls try again! `, {
+            duration: 2000,
+            position: "top-center",
+            ariaProps: {
+              role: "status",
+              "aria-live": "polite",
+            },
+          });
+        }
       }
     } catch (err: any) {
       console.log(err);
+      toast.error(`${err.message} Pls try again! `, {
+        duration: 2000,
+        position: "top-center",
+        ariaProps: {
+          role: "status",
+          "aria-live": "polite",
+        },
+      });
     }
   }
 

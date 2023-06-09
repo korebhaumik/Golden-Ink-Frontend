@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { CartContext } from "../context/Cart.context";
 import { BookType } from "../context/Store.context";
 import { ImageContext } from "../context/Image.context";
+import { toast } from "react-hot-toast";
 
 export default function Checkout() {
   const cartRelated = useContext(CartContext);
@@ -30,7 +31,15 @@ export default function Checkout() {
   }
   const total = subtotal + 15 + 5;
   const handleSubmit = async () => {
-    const res = await fetch("http://localhost:1337/payment", {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = (email: string) => {
+      return emailRegex.test(email);
+    };
+    
+    if(!isValidEmail(temp.email)){
+      return toast.error("Pls enter a valid email address.");
+    }
+    const res = await fetch("http://159.89.170.119:1338/payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -39,6 +48,7 @@ export default function Checkout() {
     const { url }: { url: string } = await res.json();
     window.open(url, "_self");
   };
+  
   return (
     <div className="flex flex-wrap justify-between max-w-5.5xl pt-32 mx-4 sm:mx-20 xl:mx-auto ">
       {/* LHS */}
@@ -71,13 +81,13 @@ export default function Checkout() {
         <h1 className="mt-4 text-xl font-medium">Delivery Information</h1>
         <div className="flex justify-between mt-3">
           {/* Standard */}
-          <div className="w-full px-4 py-2 mr-5 border rounded border-primary-400 h-28 hover:outline-accent-blue-600 hover:outline-4 cursor-pointer">
+          <div className="w-full px-4 py-2 mr-5 border rounded cursor-pointer border-primary-400 h-28 hover:outline-accent-blue-600 hover:outline-4">
             <h2>Standard</h2>
             <p>4-10 business days</p>
             <p>$5.00</p>
           </div>
           {/* Express */}
-          <div className="w-full px-4 py-2 border rounded border-primary-400 cursor-pointer">
+          <div className="w-full px-4 py-2 border rounded cursor-pointer border-primary-400">
             <h2>Express</h2>
             <p>2-5 business days</p>
             <p>$15.00</p>
@@ -168,7 +178,7 @@ function CartElement({ book }: ICartElementType) {
           </div>
           <div className="flex justify-between text-sm font-light">
             <p className="text-primary-400">Qty 1</p>
-            <a className="text-accent-blue-800 cursor-pointer">Remove</a>
+            <a className="cursor-pointer text-accent-blue-800">Remove</a>
           </div>
         </div>
       </div>

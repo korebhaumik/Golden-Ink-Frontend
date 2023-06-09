@@ -110,7 +110,7 @@ export default function ItemPreview({ setBool, book }: ItemPreviewProps) {
           </button>
           <div className="flex text-accent-green-600">
             <ShieldSVG />
-            <p>Guarenteed Delivery by {Date.now()}</p>
+            <p>Guarenteed Delivery in 2 Days.</p>
           </div>
         </div>
         {/* <CrossSVG /> */}

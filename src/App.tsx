@@ -12,6 +12,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./context/Auth.context";
 import { ImageProvider } from "./context/Image.context";
+import { Toaster } from "react-hot-toast";
 type Props = {};
 
 export default function App({}: Props) {
@@ -19,6 +20,7 @@ export default function App({}: Props) {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
+        <Toaster />
         <AuthProvider>
           <ImageProvider>
             <CartProvider>

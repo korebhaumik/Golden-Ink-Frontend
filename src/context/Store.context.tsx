@@ -26,7 +26,7 @@ function StoreProvider({ children }: { children: JSX.Element }) {
     queryKey: ["storeData"],
     // queryFn: () => fetch("store_full.json").then((res) => res.json()),
     queryFn: () =>
-      fetch("http://localhost:1337/getMine").then((res) => res.json()),
+      fetch("http://159.89.170.119:1338/getMine").then((res) => res.json()),
   });
 
   return (
