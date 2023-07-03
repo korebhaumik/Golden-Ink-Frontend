@@ -2,7 +2,7 @@ import { LArrowSVG, TruckSVG, RefundSVG, LockSVG } from "../assets/svg";
 import FAQList from "../components/FAQList.home";
 import Slider from "../components/Slider.home";
 import Logo from "../assets/Logo.svg";
-import Illustration from "../assets/Illustration_2.png"
+import Illustration from "../assets/Illustration_2.webp"
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
