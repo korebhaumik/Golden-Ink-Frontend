@@ -7,7 +7,7 @@ import image_4 from "../assets/book_4.webp";
 import image_5 from "../assets/book_5.png";
 import image_6 from "../assets/book_6.png";
 import image_7 from "../assets/book_7.webp";
-import image_8 from "../assets/book_8.png";
+import image_8 from "../assets/book_8.webp";
 import image_9 from "../assets/book_9.webp";
 import image_10 from "../assets/book_10.webp";
 import image_11 from "../assets/book_11.webp";
