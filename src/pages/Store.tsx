@@ -19,7 +19,7 @@ export default function Store({}: Props) {
     return <Card book={book} key={Math.random()} />;
   });
 
-  console.log(data)
+  // console.log(data)
 
   return (
     <div className="pb-16 pt-32 max-w-5.5xl mx-4 sm:mx-20 xl:mx-auto">

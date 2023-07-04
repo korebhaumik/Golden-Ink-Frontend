@@ -1,4 +1,4 @@
-import avatar_1 from "./avatars/avatar_1.png";
+import avatar_1 from "./avatars/avatar_1.webp";
 import avatar_2 from "./avatars/avatar_2.png";
 import avatar_3 from "./avatars/avatar_3.png";
 import avatar_4 from "./avatars/avatar_4.png";
