@@ -16,7 +16,7 @@ export default function ({ book }: Props) {
     <>
       <div className="my-4 mx-auto md:mx-0">
         <div
-          className="py-12 px-[3.05rem] rounded bg-primary-200 w-fit shadow hover:bg-accent-blue-33 hover:rounded-none cursor-pointer"
+          className="py-12 px-[3.05rem] w-[13.75rem] rounded bg-primary-200 shadow hover:bg-accent-blue-33 hover:rounded-none cursor-pointer"
           onClick={() => {
             setBool((prev) => !prev);
             document.body.style.overflow = "hidden";
@@ -25,7 +25,7 @@ export default function ({ book }: Props) {
           <img
           //@ts-ignore
             src={imageArr[book.url]}
-            className="h-44 border-2 border-black"
+            className="h-44 border-2 w-[120px] border-black"
             alt=""
           />
         </div>

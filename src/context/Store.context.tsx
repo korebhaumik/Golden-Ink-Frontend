@@ -15,14 +15,19 @@ type ContextType = {
   name: string;
   isLoading: boolean;
   error: unknown;
-  data: BookType[];
+  data: BookType[] | null;
 };
-const StoreContext = createContext<Partial<ContextType>>({});
+const StoreContext = createContext<ContextType>({
+  name: "korebhaumik",
+  isLoading: true,
+  error: null,
+  data: null,
+});
 
 function StoreProvider({ children }: { children: JSX.Element }) {
   const [name, setName] = useState<string>("Bhaumik");
 
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data = null } = useQuery<BookType[]>({
     queryKey: ["storeData"],
     // queryFn: () => fetch("store_full.json").then((res) => res.json()),
     queryFn: () =>
@@ -30,7 +35,7 @@ function StoreProvider({ children }: { children: JSX.Element }) {
   });
 
   return (
-    <StoreContext.Provider value={{ name, isLoading, error, data }}>
+    <StoreContext.Provider value={{ name, isLoading:true, error, data }}>
       {children}
     </StoreContext.Provider>
   );

@@ -8,45 +8,35 @@ import {
 } from "../assets/svg";
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useFilters } from "../hooks/useFilters";
 
 type Props = {};
+const baseFilter = {
+  genre: [
+    "Fiction",
+    "Fantasy",
+    "Horror",
+    "Romance",
+    "Thriller",
+    "Mystery",
+    "Literature",
+    "Philosophy",
+    "Selp-Help",
+    "Comedy",
+    "Poetry",
+    "Comic",
+  ],
+};
 
 export default function Filter({}: Props) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { handleSelectorStatus, selectorIsOpen, filters } = useFilters();
   const elementRef = useRef<HTMLDivElement>(null);
-  const [filters, setFilters] = useState<any[]>([
-    {
-      type: "genre",
-      label: "Fiction",
-    },
-    {
-      type: "genre",
-      label: "Fantasy",
-    },
-    {
-      type: "genre",
-      label: "Horror",
-    },
-    {
-      type: "exclusive",
-      label: "Classics",
-    },
-    {
-      type: "exclusive",
-      label: "Popular with Kids",
-    },
-    {
-      type: "rating",
-      label: "4 stars",
-    },
-  ]);
-
+  
   function handler(event: any) {
     if (!elementRef.current?.contains(event.target as Element)) {
-      setIsOpen(false);
+      handleSelectorStatus(false);
     }
   }
-
   useEffect(() => {
     window.addEventListener("click", handler);
     return () => {
@@ -55,7 +45,12 @@ export default function Filter({}: Props) {
   }, []);
 
   const BajJSX = filters.map((filter) => {
-    return <Baj key={Math.random()} type={filter.type} label={filter.label} />;
+    console.log(filter);
+    if (filter.isChecked) {
+      return (
+        <Baj key={Math.random()} type={filter.type} label={filter.label} />
+      );
+    }
   });
 
   return (
@@ -66,7 +61,7 @@ export default function Filter({}: Props) {
           <button
             className="flex items-center justify-between px-6 py-4 bg-white border shadow-lg h-fit w-fit border-slate-200 "
             onClick={() => {
-              setIsOpen((prev) => !prev);
+              handleSelectorStatus(!selectorIsOpen);
             }}
           >
             <FilterSVG />
@@ -76,7 +71,7 @@ export default function Filter({}: Props) {
             <ChevronDownSVG />
           </button>
           <AnimatePresence>
-            {isOpen && <FilterSelector setFilters={setFilters} />}
+            {selectorIsOpen && <FilterSelector />}
           </AnimatePresence>
         </div>
         <div className="flex flex-wrap mx-0 my-2 md:my-0 md:mx-4">{BajJSX}</div>
@@ -96,9 +91,15 @@ function Baj({ type, label }: BajPropType) {
     <div
       className={`${colorVariants[type]} px-4 h-fit py-2 rounded font-medium mr-3 mt-3 flex items-center`}
     >
-      {type == "genre" && <GenreSVG className="w-5 h-5 mr-1" />}
-      {type == "rating" && <RatingSVG className="w-5 h-5 mr-1" />}
-      {type == "exclusive" && <ExclusiveSVG className="w-5 h-5 mr-1" />}
+      {type == "genre" && (
+        <GenreSVG className={`w-5 h-5 mr-1 ${colorVariants[type]}`} />
+      )}
+      {type == "rating" && (
+        <RatingSVG className={`w-5 h-5 mr-1 ${colorVariants[type]}`} />
+      )}
+      {type == "exclusive" && (
+        <ExclusiveSVG className={`w-5 h-5 mr-1 ${colorVariants[type]}`} />
+      )}
       <p className="text-sm">{label}</p>
     </div>
   );
@@ -113,7 +114,7 @@ interface IFilterSelector {
   setFilters: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
-function FilterSelector({ setFilters }: IFilterSelector) {
+function FilterSelector() {
   return (
     <motion.div
       className="absolute h-fit w-fit sm:flex flex-wrap justify-between my-2 top-14 bg-white py-6 px-10  border border-slate-200 rounded shadow-md sm:w-[31.2rem]"
@@ -147,19 +148,19 @@ function FilterSelector({ setFilters }: IFilterSelector) {
         <div className="flex justify-between w-60">
           {/* left */}
           <div className="w-24">
-            <FormUnit label="Horror" setFilters={setFilters} />
-            <FormUnit label="Fiction" setFilters={setFilters} />
-            <FormUnit label="Fantasy" setFilters={setFilters} />
-            <FormUnit label="Literature" setFilters={setFilters} />
-            <FormUnit label="Philosophy" setFilters={setFilters} />
+            <FormUnit label="Fiction" />
+            <FormUnit label="Fantasy" />
+            <FormUnit label="Horror" />
+            <FormUnit label="Literature" />
+            <FormUnit label="Philosophy" />
           </div>
           {/* right */}
           <div>
-            <FormUnit label="Romance" setFilters={setFilters} />
-            <FormUnit label="Selp-Help" setFilters={setFilters} />
-            <FormUnit label="Comedy" setFilters={setFilters} />
-            <FormUnit label="Poetry" setFilters={setFilters} />
-            <FormUnit label="Comic" setFilters={setFilters} />
+            <FormUnit label="Romance" />
+            <FormUnit label="Self-Help" />
+            <FormUnit label="Comedy" />
+            <FormUnit label="Poetry" />
+            <FormUnit label="Comic" />
           </div>
         </div>
       </div>
@@ -170,11 +171,11 @@ function FilterSelector({ setFilters }: IFilterSelector) {
           <h1 className="font-medium">Rating</h1>
         </div>
         <div className="flex flex-col justify-between w-32">
-          <FormUnit label={<Stars num={5} />} setFilters={setFilters} />
-          <FormUnit label={<Stars num={4} />} setFilters={setFilters} />
-          <FormUnit label={<Stars num={3} />} setFilters={setFilters} />
-          <FormUnit label={<Stars num={2} />} setFilters={setFilters} />
-          <FormUnit label={<Stars num={1} />} setFilters={setFilters} />
+          <FormUnit children={<Stars num={5} />} label="5 stars" />
+          <FormUnit children={<Stars num={4} />} label="4 stars" />
+          <FormUnit children={<Stars num={3} />} label="3 stars" />
+          <FormUnit children={<Stars num={2} />} label="2 stars" />
+          <FormUnit children={<Stars num={1} />} label="1 star" />
         </div>
       </div>
       {/* Exclusive */}
@@ -185,12 +186,12 @@ function FilterSelector({ setFilters }: IFilterSelector) {
         </div>
         <div className="sm:flex flex-wrap justify-between sm:w-80 ">
           <div className="w-36">
-            <FormUnit label="New Arrivals" setFilters={setFilters} />
-            <FormUnit label="Our Top Picks" setFilters={setFilters} />
+            <FormUnit label="New Arrivals" />
+            <FormUnit label="Top Picks" />
           </div>
           <div className="w-40">
-            <FormUnit label="All Time Classics" setFilters={setFilters} />
-            <FormUnit label="Popular with Kids" setFilters={setFilters} />
+            <FormUnit label="Classics" />
+            <FormUnit label="Popular with Kids" />
           </div>
         </div>
       </div>
@@ -198,33 +199,29 @@ function FilterSelector({ setFilters }: IFilterSelector) {
   );
 }
 
-function FormUnit({ labelClassName, label, setFilters }: IFormUnit) {
+function FormUnit({ label, children }: IFormUnit) {
+  const { handleFilters, filters } = useFilters();
+  let indexTBU = filters.findIndex((filter) => filter.label === label);
+
   const [temp, setTemp] = useState<boolean>(false);
-  const handleCheckFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTemp((prev) => !prev);
-    if (e.target.checked) {
-      console.log("jhfsfjsj");
-      setFilters((prev) => {
-        return [
-          ...prev,
-          {
-            type: "genre",
-            label: label,
-          },
-        ];
-      });
-    }
+  const handleCheckFilter = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    label: React.ReactNode
+  ) => {
+    handleFilters(label as string);
   };
-  const seeChecked = "";
+
   return (
     <label className="flex h-7 items-center">
       <input
         type="checkbox"
         className="border-slate-200 outline-slate-200"
-        onChange={handleCheckFilter}
-        checked={temp}
+        onChange={(e) => handleCheckFilter(e, label)}
+        checked={filters[indexTBU].isChecked}
+        // checked={temp}
       />
-      <span className="ml-2 text-sm">{label}</span>
+      {children ? null : <span className="ml-2 text-sm">{label}</span>}
+      <span className="ml-2 text-sm">{children}</span>
     </label>
   );
 }
@@ -239,7 +236,6 @@ function Stars({ num }: { num: number }) {
 
 interface IFormUnit {
   labelClassName?: string;
-  label?: React.ReactNode;
-  setFilters: React.Dispatch<React.SetStateAction<any[]>>;
+  label: string;
   children?: React.ReactNode;
 }
