@@ -3,7 +3,7 @@ import Card from "../components/Card";
 import QueryBar from "../components/QueryBar";
 import Filter from "../components/Filter.store";
 import { StoreContext } from "../context/Store.context";
-import { FilterProvider } from "../context/FIlter.context";
+import { FilterProvider } from "../context/Filter.context";
 import SkeletonCards from "../components/SkeletonCards.store";
 
 type Props = {};
