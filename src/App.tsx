@@ -13,6 +13,9 @@ import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./context/Auth.context";
 import { ImageProvider } from "./context/Image.context";
 import { Toaster } from "react-hot-toast";
+import Contact from "./pages/Contact";
+import Orders from "./pages/Orders";
+import Protected from "./components/Protected";
 type Props = {};
 
 export default function App({}: Props) {
@@ -29,6 +32,15 @@ export default function App({}: Props) {
                   <Route path="" element={<Home />} />
                   <Route path="/hello" element={<>Hello World</>} />
                   <Route
+                    path="/orders"
+                    element={
+                      // <Protected>
+                        <Orders />
+                      // </Protected>
+                    }
+                  />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route
                     path="/store"
                     element={
                       <StoreProvider>
@@ -36,7 +48,14 @@ export default function App({}: Props) {
                       </StoreProvider>
                     }
                   />
-                  <Route path="/checkout" element={<Checkout />} />
+                  <Route
+                    path="/checkout"
+                    element={
+                      <Protected>
+                        <Checkout />
+                      </Protected>
+                    }
+                  />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />

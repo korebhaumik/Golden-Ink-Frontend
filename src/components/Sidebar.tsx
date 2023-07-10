@@ -1,17 +1,15 @@
-import { useState, useRef, MouseEvent, useContext } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { MouseEvent, useContext } from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { EmptySVG, XMarkSVG } from "../assets/svg";
-import bookImg from "../assets/book_1.png";
-import { CartContext } from "../context/Cart.context";
 import { BookType } from "../context/Store.context";
 import { ImageContext } from "../context/Image.context";
+import { useAuth } from "../hooks/useAuth";
+import { useCart } from "../hooks/useCart";
 
 export default function Cart({ setBool, containerRef }: ContainerPropsType) {
-  const cartRelated = useContext(CartContext);
-
-  if (!cartRelated) return null;
-  const { cartData, removeFromCart, subtotal } = cartRelated;
+  const { session } = useAuth();
+  const { cartData, subtotal } = useCart();
 
   const navigate = useNavigate();
   function handler(event: MouseEvent<HTMLElement>) {
@@ -20,13 +18,21 @@ export default function Cart({ setBool, containerRef }: ContainerPropsType) {
     }
   }
 
-  let cartDisplay = [<EmptyCartUnit />];
-
-  if (cartData) {
+  let cartDisplay: React.ReactNode[] = [];
+  if (cartData?.length) {
     cartDisplay = cartData.map((book) => {
-      return <CartUnit book={book} />;
+      return <CartUnit book={book} key={Math.random()} />;
     });
+  } else {
+    cartDisplay = [<EmptyCartUnit key={Math.random()} />];
   }
+  let buttonStatus = {
+    disabled: true,
+    text: "Cart is empty :(",
+  };
+  if (subtotal) buttonStatus = { disabled: true, text: "Login to Checkout" };
+  if (session.email) buttonStatus = { disabled: false, text: "Checkout" };
+  if(!subtotal) buttonStatus = { disabled: true, text: "Cart is empty :(" };
 
   return (
     <motion.div
@@ -99,19 +105,20 @@ export default function Cart({ setBool, containerRef }: ContainerPropsType) {
           <div className="px-5 py-7 ">
             <div className="flex justify-between font-medium">
               <h2>Subtotal</h2>
-              <h2>$ {subtotal}</h2>
+              <h2> ₹ {subtotal}</h2>
             </div>
             <p className="text-sm mt-1 text-primary-400">
               Shipping and taxes calculated at checkout.{" "}
             </p>
             <button
-              className="w-full mt-5 bg-accent-blue-800 text-white rounded py-2 "
+              className="w-full mt-5 bg-accent-blue-800 text-white rounded py-2 disabled:bg-primary-400 "
               onClick={() => {
                 navigate("/checkout");
                 setBool(false);
               }}
+              disabled={buttonStatus.disabled}
             >
-              Checkout
+              {buttonStatus.text}
             </button>
             <p
               className="text-accent-blue-800 text-center text-sm mt-2 cursor-pointer"
@@ -135,11 +142,9 @@ type ContainerPropsType = {
 };
 
 function CartUnit({ book }: ICartUnit) {
-  const cartRelated = useContext(CartContext);
   const imageArr = useContext(ImageContext);
 
-  if (!cartRelated) return null;
-  const { removeFromCart } = cartRelated;
+  const { removeFromCart } = useCart();
   return (
     <>
       <div className="flex mt-5 w-full">
@@ -151,7 +156,7 @@ function CartUnit({ book }: ICartUnit) {
           <div>
             <div className="flex justify-between">
               <h2 className="leading-tight w-3/5 sm:w-52">{book.title}</h2>
-              <h2>$500</h2>
+              <h2>₹ 500</h2>
             </div>
             <p className="text-sm  text-primary-400">{book.author}</p>
           </div>

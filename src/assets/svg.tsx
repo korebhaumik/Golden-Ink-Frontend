@@ -47,7 +47,7 @@ export const NotifSVG = ({ onClick, className }: ISvg) => {
 };
 
 //Menu SVG
-export const MenuSVG = () => {
+export const MenuSVG = ({onClick, className}: ISvg) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -56,6 +56,7 @@ export const MenuSVG = () => {
       strokeWidth="1.5"
       stroke="currentColor"
       className="w-6 h-6 mx-0 cursor-pointer md:hidden"
+      onClick={onClick}
     >
       <path
         strokeLinecap="round"
@@ -206,6 +207,26 @@ export const ChevronRightSVG = () => {
   );
 };
 
+//arrow-right SVG
+export const ArrowRightSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+      />
+    </svg>
+  );
+};
+
 //chevron-down SVG
 export const ChevronDownSVG = () => {
   return (
@@ -284,7 +305,7 @@ export const StarSVG = ({ className }: { className: string }) => {
 };
 
 //Cross SVG
-export const CrossSVG = () => {
+export const CrossSVG = ({ className, onClick }: ISvg) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -292,7 +313,9 @@ export const CrossSVG = () => {
       viewBox="0 0 24 24"
       strokeWidth="2.5"
       stroke="currentColor"
-      className="w-5 h-5 rotate-45 cursor-pointer text-slate-400"
+      // className="w-5 h-5 rotate-45 cursor-pointer text-slate-400"
+      className={`w-4 h-4 rotate-45 cursor-pointer text-slate-400 ${className}`}
+      onClick={onClick}
     >
       <path
         strokeLinecap="round"
@@ -563,6 +586,32 @@ export const LogOutSVG = ({ className, onClick }: ISvg) => {
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+      />
+    </svg>
+  );
+};
+
+//visa logo SVG
+export const VisaLogoSVG = ({ className, onClick }: ISvg) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="40"
+      height="40"
+      viewBox="0 0 40 40"
+      fill="none"
+    >
+      <path
+        d="M37.5 29.1667C37.5 31.0075 36.0075 32.5 34.1667 32.5H5.83333C3.9925 32.5 2.5 31.0075 2.5 29.1667V10.8333C2.5 8.9925 3.9925 7.5 5.83333 7.5H34.1667C36.0075 7.5 37.5 8.9925 37.5 10.8333V29.1667Z"
+        fill="#1565C0"
+      />
+      <path
+        d="M12.6548 15.8334L10.4665 22.36C10.4665 22.36 9.91065 19.5992 9.85565 19.2525C8.60982 16.41 6.77148 16.5684 6.77148 16.5684L8.93815 25V24.9984H11.5723L15.2148 15.8334H12.6548ZM14.7406 25H17.1332L18.5798 15.8334H16.1573L14.7406 25ZM31.6732 15.8334H29.1557L25.2307 25H27.6073L28.0973 23.6909H31.094L31.349 25H33.5265L31.6732 15.8334ZM28.7607 21.94L30.0632 18.4759L30.7448 21.94H28.7607ZM21.974 18.505C21.974 18 22.389 17.6242 23.579 17.6242C24.3523 17.6242 25.2382 18.1859 25.2382 18.1859L25.6265 16.2617C25.6265 16.2617 24.4948 15.8325 23.384 15.8325C20.8682 15.8325 19.5707 17.0359 19.5707 18.5592C19.5707 21.3142 22.8865 20.9367 22.8865 22.3517C22.8865 22.5942 22.694 23.155 21.3132 23.155C19.9282 23.155 19.014 22.6475 19.014 22.6475L18.6015 24.4942C18.6015 24.4942 19.4873 24.9992 21.199 24.9992C22.9148 24.9992 25.2948 23.7159 25.2948 21.8725C25.2948 19.655 21.974 19.495 21.974 18.505Z"
+        fill="white"
+      />
+      <path
+        d="M10.1762 20.7876L9.37119 16.8309C9.37119 16.8309 9.00702 15.9734 8.06035 15.9734C7.11369 15.9734 4.36035 15.9734 4.36035 15.9734C4.36035 15.9734 9.07785 17.3667 10.1762 20.7876Z"
+        fill="#FFC107"
       />
     </svg>
   );

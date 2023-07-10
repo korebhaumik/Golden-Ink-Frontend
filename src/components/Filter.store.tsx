@@ -10,28 +10,10 @@ import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useFilters } from "../hooks/useFilters";
 
-type Props = {};
-const baseFilter = {
-  genre: [
-    "Fiction",
-    "Fantasy",
-    "Horror",
-    "Romance",
-    "Thriller",
-    "Mystery",
-    "Literature",
-    "Philosophy",
-    "Selp-Help",
-    "Comedy",
-    "Poetry",
-    "Comic",
-  ],
-};
-
-export default function Filter({}: Props) {
+export default function Filter() {
   const { handleSelectorStatus, selectorIsOpen, filters } = useFilters();
   const elementRef = useRef<HTMLDivElement>(null);
-  
+
   function handler(event: any) {
     if (!elementRef.current?.contains(event.target as Element)) {
       handleSelectorStatus(false);
@@ -45,7 +27,7 @@ export default function Filter({}: Props) {
   }, []);
 
   const BajJSX = filters.map((filter) => {
-    console.log(filter);
+    // console.log(filter);
     if (filter.isChecked) {
       return (
         <Baj key={Math.random()} type={filter.type} label={filter.label} />

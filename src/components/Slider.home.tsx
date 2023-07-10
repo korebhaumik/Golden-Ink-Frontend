@@ -17,21 +17,21 @@ const cardsArr: cardType[] = [
   {
     id: 1,
     avatar: <Avatar_7 />,
-    comment: "",
+    comment: "I had a fantastic experience with the Golden Ink! Their products and service exceeded my expectations.",
     username: "Bhaumik Kore",
     rating: 5,
   },
   {
     id: 2,
     avatar: <Avatar_14 />,
-    comment: "",
+    comment: "The book arrived quickly and was exactly as described. I would highly recommend shopping here.",
     username: "Atharv Patawar",
     rating: 4,
   },
   {
     id: 3,
     avatar: <Avatar_19 />,
-    comment: "",
+    comment: "I have been a loyal customer of Golden Ink for years now, and I can confidently say that their service is exceptional.",
     username: "Mohammed Mehdi",
     rating: 5,
   },
@@ -42,7 +42,7 @@ export default function Slider() {
   return (
     <>
       {/* Dots */}
-      <div className="absolute hidden sm:flex top-16 right-20">
+      <div className="absolute hidden sm:flex top-5 right-5">
         <svg className="w-3 h-3 ml-2 bg-blue-700 rounded-full"></svg>
         <svg className="w-3 h-3 ml-2 rounded-full bg-slate-400"></svg>
         <svg className="w-3 h-3 ml-2 rounded-full bg-slate-400"></svg>
@@ -70,8 +70,7 @@ function Card({ card }: { card: cardType }) {
       {card.avatar}
       <QuotesSVG />
       <p className="my-2 mt-3 text-slate-500">
-        I had a fantastic experience with the Golden Ink! Their products and
-        service exceeded my expectations.
+       {card.comment}
       </p>
       <h2 className="mb-2">{card.username}</h2>
       <div>

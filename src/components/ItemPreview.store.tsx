@@ -2,16 +2,14 @@ import { useRef, MouseEvent, useContext } from "react";
 import { motion } from "framer-motion";
 import { BookType } from "../context/Store.context";
 import { CheckSVG, StarSVG, ShieldSVG } from "../assets/svg";
-import { CartContext } from "../context/Cart.context";
 import { ImageContext } from "../context/Image.context";
+import { useCart } from "../hooks/useCart";
 
 export default function ItemPreview({ setBool, book }: ItemPreviewProps) {
   const ModalRef = useRef<HTMLDivElement>(null);
   const imageArr = useContext(ImageContext);
-  const data = useContext(CartContext);
-  if (!data) return null;
+  const { addToCart } = useCart();
 
-  const { addToCart } = data;
   function handleIsOpen(
     event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>
   ) {
@@ -22,7 +20,7 @@ export default function ItemPreview({ setBool, book }: ItemPreviewProps) {
   }
 
   const BajArrJSX: JSX.Element[] = book.genre.map((genre) => {
-    return <Baj label={genre} />;
+    return <Baj label={genre} key={Math.random()} />;
   });
   return (
     // Overlay
@@ -53,7 +51,7 @@ export default function ItemPreview({ setBool, book }: ItemPreviewProps) {
       {/* Modal */}
       <motion.div
         ref={ModalRef}
-        className="absolute flex justify-between z-20 w-full sm:p-10 sm:px-12 sm:w-[47.25rem] rounded h-fit mx-auto bg-slate-200 "
+        className="absolute flex px-5 py-10 flex-wrap justify-between z-20 w-full sm:p-10 sm:px-12 sm:w-[47.25rem] rounded h-fit mx-auto bg-slate-200 "
         initial={{
           opacity: 0,
           scale: 0.95,
@@ -78,15 +76,15 @@ export default function ItemPreview({ setBool, book }: ItemPreviewProps) {
         }}
       >
         {/* @ts-ignore */}
-        <img src={imageArr[book.url]} className="border-2 border-black h-80" />
+        <img src={imageArr[book.url]} className="hidden sm:block border-2 border-black h-80" />
         <div className="sm:w-96 ">
           <h1 className="text-2xl">{book.title}</h1>
           <h2 className="text-lg text-accent-blue-600">- {book.author}</h2>
           <div className="flex items-center">
-            <h2 className="text-xl">$ 500</h2>
+            <h2 className="text-xl">₹ 500</h2>
             <hr className="w-1 h-5 mx-3 border-none rounded bg-primary-400" />
             <div className="flex items-center">
-              <Stars num={book.rating}/>
+              <Stars num={book.rating} />
               <h2 className="text-yellow-500 underline cursor-pointer">
                 {/* {"(Reviews)"} */}
               </h2>
@@ -134,7 +132,6 @@ type ItemPreviewProps = {
   book: BookType;
   setBool: React.Dispatch<React.SetStateAction<boolean>>;
 };
-
 
 function Stars({ num }: { num: number }) {
   const StarsArrJSX: JSX.Element[] = [];

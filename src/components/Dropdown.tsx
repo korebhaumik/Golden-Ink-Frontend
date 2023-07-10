@@ -5,19 +5,16 @@ import {
   ShoppingBagSVG,
   UserCircleSVG,
 } from "../assets/svg";
-import { AuthContext } from "../context/Auth.context";
-import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 type Props = {
-  setDBool: React.Dispatch<React.SetStateAction<boolean>>;
+  setDropdownIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function Dropdown({ setDBool }: Props) {
-  const authRelated = useContext(AuthContext);
-
-  if (!authRelated) return null;
-
-  const { handleLogout } = authRelated;
+export default function Dropdown({ setDropdownIsOpen }: Props) {
+  const navigate = useNavigate();
+  const { handleLogout } = useAuth();
 
   return (
     <motion.div
@@ -43,15 +40,31 @@ export default function Dropdown({ setDBool }: Props) {
         },
       }}
     >
-      <div className="cursor-pointer flex items-center">
+      <div
+        className="cursor-pointer flex items-center"
+        onClick={() => {
+          setDropdownIsOpen(false);
+        }}
+      >
         <UserCircleSVG />
         <p className="ml-2 text-sm">Account Info</p>
       </div>
-      <div className="mt-2 cursor-pointer flex items-center">
+      <div
+        className="mt-2 cursor-pointer flex items-center"
+        onClick={() => {
+          navigate("/orders");
+          setDropdownIsOpen(false);
+        }}
+      >
         <ShoppingBagSVG />
         <p className="ml-2 text-sm">Orders</p>
       </div>
-      <div className="mt-2 cursor-pointer flex items-center">
+      <div
+        className="mt-2 cursor-pointer flex items-center"
+        onClick={() => {
+          setDropdownIsOpen(false);
+        }}
+      >
         <NotifSVG className="w-6 h-6 cursor-pointer" />
         <p className="ml-2 text-sm">Notifications</p>
       </div>
@@ -59,7 +72,7 @@ export default function Dropdown({ setDBool }: Props) {
         className="mt-2 text-red-600 cursor-pointer flex items-center"
         onClick={() => {
           handleLogout();
-          setDBool(false);
+          setDropdownIsOpen(false);
         }}
       >
         <LogOutSVG />

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { TRArrowSVG, RArrowSVG } from "../assets/svg";
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/Auth.context";
+import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 interface IForm {
   email: string;
@@ -14,11 +14,8 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const authRelated = useContext(AuthContext);
 
-  if (!authRelated) return null;
-
-  const { handleLogin } = authRelated;
+  const { handleLogin } = useAuth();
 
   return (
     <div className="flex items-center h-screen ">

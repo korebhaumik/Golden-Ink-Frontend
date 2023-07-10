@@ -2,7 +2,7 @@ import { LArrowSVG, TruckSVG, RefundSVG, LockSVG } from "../assets/svg";
 import FAQList from "../components/FAQList.home";
 import Slider from "../components/Slider.home";
 import Logo from "../assets/Logo.svg";
-import Illustration from "../assets/Illustration_2.webp"
+import Illustration from "../assets/Illustration_2.webp";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       {/* Section 1 */}
-      <div className="pt-24 pb-10 sm:pb-20 sm:pt-36 bg-primary-200">
+      <div className="pt-24 pb-10 -z-50 sm:pb-20 sm:pt-36 bg-primary-200">
         <div className="flex flex-wrap-reverse justify-between max-w-5.5xl mx-4 sm:mx-auto">
           {/* Content */}
           <div className="max-w-lg">
@@ -20,19 +20,21 @@ export default function Home() {
             <h1 className="max-w-lg my-0 text-3xl font-medium leading-snug sm:text-5xl sm:leading-tight sm:my-3 ">
               Your{" "}
               <span className="underline text-accent-blue-600 underline-offset-2 ">
-                Golden Ink 
+                Golden Ink
               </span>{" "}
               is just a click away...
             </h1>
             <p className="my-4 text-accent-gray-400">
-              Lorem ipsum dolor sit amet consectetur. Eu vulputate ut purus
-              hendrerit at laoreet dolor vivamus. Euismod enim diam natoque
-              faucibus. In libero magna ipsum nisl enim in.
+              Discover a vast collection of books across various genres. From
+              bestsellers to rare finds, we have something for every book lover.
+              Explore, order, and indulge in the joy of reading with us.
             </p>
-            <button className="px-8 py-4 my-3 text-white rounded-full bg-gradient-to-r from-accent-blue-800 to-accent-blue-600"
-            onClick={() => {
-              navigate("/store");
-            }}>
+            <button
+              className="px-8 py-4 my-3 text-white rounded-full bg-gradient-to-r from-accent-blue-800 to-accent-blue-600"
+              onClick={() => {
+                navigate("/store");
+              }}
+            >
               <a className="flex items-center">
                 Start Shopping
                 <LArrowSVG />
@@ -51,19 +53,25 @@ export default function Home() {
             </div>
           </div>
           {/* Illustration */}
-            <img src={Illustration} className="hidden lg:block h-[26rem]" alt="" />
+          <img
+            src={Illustration}
+            className="hidden lg:block h-[26rem]"
+            alt=""
+          />
         </div>
       </div>
 
       {/* Section 2 */}
-      <div className="py-0 sm:py-8">
+      <div className="py-0 sm:py-8" id="feature">
         <div className="max-w-5.5xl mx-4 mb-10 my-7 sm:mx-auto">
           <h1 className="mb-4 text-3xl font-medium leading-snug sm:text-4xl sm:leading-tight ">
-            A Seamless <span className="underline text-sky-600">Experience</span>{" "}
-            is what we offer...
+            A Seamless{" "}
+            <span className="underline text-sky-600">Experience</span> is what
+            we offer...
           </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur. Nullam tortor amet aliquet.
+            Delve into a captivating reading experience with our ecommerce book
+            store.
           </p>
           {/* Features */}
           <div className="flex flex-wrap items-center justify-between mt-6 mb-6 sm:mt-10 sm:mb-9">
@@ -77,8 +85,8 @@ export default function Home() {
               <TruckSVG />
               <h2 className="my-2 text-xl">Free Shipping</h2>
               <p className="font-light text-slate-400">
-                Lorem ipsum dolor sit amet consectetur. Tempus iaculis dolor
-                ullamcorper fames tristique integer enim nisi.
+                Shop now for free shipping on all orders. Wide range of products
+                delivered to your doorstep, no extra charges.
               </p>
             </div>
             <div className="py-8 mb-4 text-white rounded-lg bg-slate-800 sm:w-80 px-9">
@@ -89,10 +97,10 @@ export default function Home() {
                 </span>
               </div>
               <RefundSVG />
-              <h2 className="my-2 text-xl">Free Shipping</h2>
+              <h2 className="my-2 text-xl">Easy Refunds</h2>
               <p className="font-light text-slate-400">
-                Lorem ipsum dolor sit amet consectetur. Tempus iaculis dolor
-                ullamcorper fames tristique integer enim nisi.
+                We offer hassle-free refunds on all orders. If you're not
+                satisfied, simply return your purchase for a full refund.
               </p>
             </div>
             <div className="py-8 mb-4 text-white rounded-lg bg-slate-800 sm:w-80 px-9">
@@ -103,10 +111,10 @@ export default function Home() {
                 </span>
               </div>
               <LockSVG />
-              <h2 className="my-2 text-xl">Free Shipping</h2>
+              <h2 className="my-2 text-xl">Secure Payments</h2>
               <p className="font-light text-slate-400">
-                Lorem ipsum dolor sit amet consectetur. Tempus iaculis dolor
-                ullamcorper fames tristique integer enim nisi.
+                Shop with confidence knowing that we offer secure payment
+                options to protect your personal information.
               </p>
             </div>
           </div>
@@ -120,8 +128,8 @@ export default function Home() {
         </div>
       </div>
       {/* Section 3 */}
-      <div className="relative py-12 bg-slate-800">
-        <div className="max-w-5.5xl mx-4 sm:mx-auto">
+      <div className="py-12 bg-slate-800">
+        <div className="relative max-w-5.5xl mx-4 sm:mx-auto">
           <h1 className="my-3 text-3xl font-medium leading-snug text-white sm:text-4xl sm:leading-tight">
             Our <span className="underline text-sky-600 ">Customers</span> love
             us...
@@ -151,8 +159,9 @@ export default function Home() {
               <h1 className="text-3xl font-medium leading-snug sm:text-4xl">
                 Ready to use the Golden Ink ?
               </h1>
-              <p className="font-medium mt-2 text-primary-600">
-                Create your own account now !!
+              <p className="mt-2 sm:w-[35rem] font-medium text-primary-600">
+                {/* Create your own account now !! */}
+                Immerse yourself in a world of literature with Golden Ink and Co, where reading becomes an unforgettable journey.
               </p>
             </div>
             <button
@@ -186,16 +195,16 @@ export default function Home() {
           {/* Services */}
           <div className="mt-2 mb-3 text-sm font-light w-44 text-primary-400">
             <h1 className="mb-4 text-base text-white">Services</h1>
-            <p>Free Shipping</p>
-            <p>Full Refund</p>
-            <p>24/7 Customer Service</p>
+            <a href="#feature" className="block">Free Shipping</a>
+            <a href="#feature" className="block">Full Refund</a>
+            <a href="#feature" className="block">24/7 Customer Service</a>
           </div>
           {/* Routes */}
           <div className="w-32 mt-2 mb-3 text-sm font-light text-primary-400">
             <h1 className="mb-4 text-base text-white">Routes</h1>
-            <p>Store</p>
-            <p>About Us</p>
-            <p>Contact</p>
+            <a href="/store" className="block">Store</a>
+            <a href="/orders" className="block">Orders</a>
+            <a href="/contact" className="block">Contact</a>
           </div>
           {/* location */}
           <div className="w-40 mt-2 mb-3 text-sm font-light text-primary-400">
@@ -210,7 +219,7 @@ export default function Home() {
             <h1 className="mb-4 text-base text-white">
               Sign up to our newsletter.
             </h1>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <p>Access to newsletter subscription will be available soon.</p>
             <div className="relative w-full mt-3">
               {/* <input
                 className="w-full px-4 py-3 text-white rounded outline-none bg-accent-blue-33"
@@ -218,19 +227,19 @@ export default function Home() {
                 placeholder="Email Address"
               /> */}
             </div>
-            <button
+            {/* <button
               className="px-4 py-4 text-white bg-black"
               onClick={() => {
                 navigate("/login");
               }}
             >
               Click me{" "}
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="mx-auto mt-5 sm:w-96">
           <hr />
-          <p className="mt-5 text-sm text-center  sm:w-auto text-primary-400">
+          <p className="mt-5 text-sm text-center sm:w-auto text-primary-400">
             Copyright © 2023 Golden Ink. All Rights Reserved.
           </p>
         </div>

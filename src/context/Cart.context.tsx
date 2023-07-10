@@ -7,13 +7,18 @@ type ContextType = {
   removeFromCart: (book: BookType) => void;
   subtotal: number;
 };
-const CartContext = createContext<ContextType | null>(null);
+const CartContext = createContext<ContextType>({
+  cartData: [],
+  addToCart: (book: BookType) => {},
+  removeFromCart: (book: BookType) => {},
+  subtotal: 0,
+});
 
 function CartProvider({ children }: { children: React.ReactNode }) {
   const [cartData, setCartData] = useState<BookType[]>();
 
   function addToCart(book: BookType) {
-    console.log(book);
+    // console.log(book);
     setCartData((prev) => {
       if (prev) return [...prev, book];
       return [book];
