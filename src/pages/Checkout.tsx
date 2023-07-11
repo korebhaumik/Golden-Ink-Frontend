@@ -5,6 +5,11 @@ import { ImageContext } from "../context/Image.context";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../hooks/useAuth";
 
+const MODE = import.meta.env.VITE_MODE;
+const DEV_API = import.meta.env.VITE_DEV_API;
+const PROD_API = import.meta.env.VITE_PROD_API;
+let HOST = MODE === "DEV" ? DEV_API : PROD_API;
+
 export default function Checkout() {
   const { session } = useAuth();
   console.log(session);
@@ -52,7 +57,7 @@ export default function Checkout() {
     }
     toast.loading("Your payment is processing...");
     // const res = await fetch("http://localhost:1337/payment", {
-    const res = await fetch("https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/payment", {
+    const res = await fetch(`${HOST}/payment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

@@ -14,6 +14,14 @@ type ContextType = {
   handleSignup: (payload: any) => Promise<void>;
   handleLogout: () => Promise<void>;
 };
+const MODE = import.meta.env.VITE_MODE;
+const DEV_API = import.meta.env.VITE_DEV_API;
+const PROD_API = import.meta.env.VITE_PROD_API;
+// let HOST = DEV_API;
+let HOST = MODE === "DEV" ? DEV_API : PROD_API;
+console.log(MODE);
+console.log(`${HOST}/getUser`);
+
 const AuthContext = createContext<ContextType>({
   isAuth: false,
   session: { username: "", email: "" },
@@ -40,7 +48,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     if (isAuth) {
       (async () => {
         try {
-          const response = await fetch("http://localhost:1337/getUser", {
+          const response = await fetch(`${HOST}/getUser`, {
             // const response = await fetch("https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/getUser", {
             method: "GET",
             mode: "cors",
@@ -60,11 +68,11 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function handleLogin(payload: any) {
     try {
-      // const response = await fetch("http://localhost:1337/loginUser", {
+      const response = await fetch(`${HOST}/loginUser`, {
         // const response = await fetch("http://159.89.170.119:1338/loginUser", {
-        const response = await fetch(
-          "https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/loginUser",
-          {
+        // const response = await fetch(
+        //   "https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/loginUser",
+        //   {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         mode: "cors",
@@ -112,10 +120,10 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   async function handleLogout() {
-    //  await fetch("http://localhost:1337/logoutUser", {
-    await fetch(
-      "https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/logoutUser",
-      {
+     await fetch(`${HOST}/logoutUser`, {
+    // await fetch(
+    //   "https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/logoutUser",
+    //   {
         credentials: "include",
       }
     );
@@ -137,10 +145,10 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
           },
         });
       } else {
-        // const response = await fetch("http://localhost:1337/createUser", {
-        const response = await fetch(
-          "https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/createUser",
-          {
+        const response = await fetch(`${HOST}/createUser`, {
+        // const response = await fetch(
+        //   "https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/createUser",
+        //   {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
