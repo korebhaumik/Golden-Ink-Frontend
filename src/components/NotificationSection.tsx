@@ -81,7 +81,14 @@ export default function Notifications({
           </div>
           <hr className="border-1 mt-2" />
           <div className=" h-[calc(100%_-_229px)]  overflow-scroll">
-            <p className="mt-5">{"No Active Notifications"}</p>
+            {/* <p className="mt-5">{"No Active Notifications"}</p> */}
+            <p className="mt-5">Filters are cosmetic.</p>
+            <p className="mt-5">User Info button disabled.</p>
+            <p className="mt-5">Better session management.</p>
+            <p className="mt-5">Search Bar not finished.</p>
+            <p className="mt-5">Avator Selector doesnt work.</p>
+            <p className="mt-5">Reviews(Home) slider doesnt work.</p>
+            <p className="mt-5">Orders Page is static.</p>
           </div>
         </div>
       </motion.div>
