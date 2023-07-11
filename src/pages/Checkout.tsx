@@ -9,7 +9,7 @@ export default function Checkout() {
   const { session } = useAuth();
   console.log(session);
 
-  const { cartData, removeFromCart, subtotal } = useCart();
+  const { cartData, subtotal } = useCart();
   const [temp, setTemp] = useState({
     email: session.email,
     "first name": "",
@@ -51,7 +51,8 @@ export default function Checkout() {
       return toast.error("Your Cart is empty.");
     }
     toast.loading("Your payment is processing...");
-    const res = await fetch("http://localhost:1337/payment", {
+    // const res = await fetch("http://localhost:1337/payment", {
+    const res = await fetch("https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

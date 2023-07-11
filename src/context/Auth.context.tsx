@@ -61,17 +61,19 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   async function handleLogin(payload: any) {
     try {
       // const response = await fetch("http://localhost:1337/loginUser", {
-      // const response = await fetch("http://159.89.170.119:1338/loginUser", {
-      const response = await fetch(
-        "https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/loginUser",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          mode: "cors",
-          credentials: "include",
-          body: JSON.stringify(payload),
-        }
-      );
+        // const response = await fetch("http://159.89.170.119:1338/loginUser", {
+        const response = await fetch(
+          "https://b5oz5e5ii3.execute-api.ap-south-1.amazonaws.com/loginUser",
+          {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        // credentials: "include",
+        credentials: "include",
+        body: JSON.stringify(payload),
+      });
+      console.log(response.headers.get("Content-Type"));
+      console.log(response.headers.get("Set-Cookie"));
       const output = await response.json();
       if (output["_id"]) {
         console.log(output);
